@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Template App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Task Template Generator</h1>
+
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Enter a task" />
+      <button onclick="addTask()">Add Task</button>
+      <button onclick="clearAllTasks()">Clear All Tasks</button>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <button onclick="generateTemplate()">Generate Template</button>
+
+    <textarea id="output" rows="8" readonly></textarea>
+    <div class="actions">
+      <button onclick="copyTemplate()">Copy</button>
+      <button onclick="downloadTemplate()">Download .txt</button>
+      <button onclick="clearTemplate()">Clear Template</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
