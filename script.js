@@ -4,20 +4,50 @@ const taskInputEl = document.getElementById("taskInput");
 document.addEventListener("DOMContentLoaded", loadTasks);
 
 function addTask() {
-  const taskText = taskInputEl.value.trim();
+  const taskInput = document.getElementById("taskInput");
+  const taskText = taskInput.value.trim();
   if (taskText === "") return;
 
-  const tasks = getStoredTasks();
-  if (tasks.includes(taskText)) {
-    alert("Task already exists.");
-    return;
-  }
+  const li = document.createElement("li");
 
-  tasks.push(taskText);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
 
-  renderTask(taskText);
-  taskInputEl.value = "";
+  const label = document.createElement("span");
+  label.textContent = taskText;
+  label.className = "task-label";
+  label.contentEditable = false;
+
+  const editBtn = document.createElement("button");
+  editBtn.innerHTML = "✏️";
+  editBtn.className = "edit-btn";
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = "❌";
+  deleteBtn.className = "delete-btn";
+
+  // Event: Edit toggle
+  editBtn.onclick = () => {
+    if (!label.isContentEditable) {
+      label.contentEditable = true;
+      label.focus();
+      editBtn.innerHTML = "💾"; // Change to save icon
+    } else {
+      label.contentEditable = false;
+      editBtn.innerHTML = "✏️";
+    }
+  };
+
+  // Event: Delete
+  deleteBtn.onclick = () => li.remove();
+
+  li.appendChild(checkbox);
+  li.appendChild(label);
+  li.appendChild(editBtn);
+  li.appendChild(deleteBtn);
+
+  document.getElementById("taskList").appendChild(li);
+  taskInput.value = "";
 }
 
 function loadTasks() {
