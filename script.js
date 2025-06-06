@@ -125,11 +125,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function generateTemplate() {
-    const completedTasks = tasks
-      .filter((t) => t.checked)
-      .map((t) => `- ${t.text}`)
-      .join("\n");
-    templateOutput.value = `Hi sir, today I was able to do the following:\n\n${completedTasks}\n\nThat's all from me for today. Thank you. 🙂`;
+  const completedTasks = tasks
+    .filter((t) => t.checked)
+    .map((t) => `- ${t.text}`)
+    .join("\n");
+
+  const now = new Date();
+  const pstDate = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+  const isFriday = pstDate.getDay() === 5;
+
+  const ending = isFriday
+    ? "That's all from me for today, thank you. Have a nice weekend! 🙂"
+    : "That's all from me for today. Thank you. 🙂";
+
+  templateOutput.value = `Hi sir, today I was able to do the following:\n\n${completedTasks}\n\n${ending}`;
   }
 
   function clearTemplate() {
